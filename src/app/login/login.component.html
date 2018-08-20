@@ -1,0 +1,50 @@
+<div class="container">
+  <form class="col s12" [formGroup]="loginForm" (ngSubmit)="loginForm.valid && userLogin(loginForm.value)" validate>
+    <div class="row">
+      <div class="col s12">
+        <input type="email" placeholder="Email" formControlName="userEmail" required />
+        <div *ngIf="(!loginForm.controls['userEmail'].valid && loginForm.controls['userEmail'].touched)">
+          <span class="errorMessage" *ngIf="loginForm.controls['userEmail'].hasError('required') "><i class="material-icons">info_outline</i>Please Enter Email ID</span>
+          <span class="errorMessage" *ngIf="loginForm.controls['userEmail'].hasError('pattern') "><i class="material-icons">info_outline</i> Enter Valid Email ID</span>
+        </div>
+        <div class="successDone" *ngIf="(loginForm.controls['userEmail'].valid && loginForm.controls['userEmail'].touched)">
+          <i class="material-icons">check</i>
+        </div>
+      </div>
+      <div class="col s12">
+        <input type="password" placeholder="Password" formControlName="password" required />
+        <div *ngIf="(!loginForm.controls['password'].valid && loginForm.controls['password'].touched)">
+          <span class="errorMessage" *ngIf="loginForm.controls['password'].hasError('required') "><i class="material-icons">info_outline</i> Please Enter Password </span>
+        </div>
+        <div class="successDone" *ngIf="(loginForm.controls['password'].valid && loginForm.controls['password'].touched)">
+          <i class="material-icons">check</i>
+        </div>
+      </div>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit" name="action">
+      Submit
+      <i class="material-icons right">send</i>
+    </button>
+    <a class="pointor" (click)="forgotPasswordModal()">Forgot Password ?</a>
+  </form>
+
+  <div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <div class="modalTitle differentModal">
+      <a class="modal-close"><i class="material-icons">close</i></a>
+    </div>
+    <form [formGroup]="forgotPasswordForm" (ngSubmit)="forgotPasswordForm.valid && forgotPassword(forgotPasswordForm.value)" validate>
+      <div class="row">
+        <div class="col s12">
+          <input type="email" placeholder="Email" formControlName="userEmail" required />
+          <div *ngIf="(!forgotPasswordForm.controls['userEmail'].valid && forgotPasswordForm.controls['userEmail'].touched)">
+            <span class="errorMessage" *ngIf="forgotPasswordForm.controls['userEmail'].hasError('required') "><i class="material-icons">info_outline</i>Please Enter Email ID</span>
+            <span class="errorMessage" *ngIf="forgotPasswordForm.controls['userEmail'].hasError('pattern') "><i class="material-icons">info_outline</i> Enter Valid Email ID</span>
+          </div>
+          <div class="successDone" *ngIf="(forgotPasswordForm.controls['userEmail'].valid && forgotPasswordForm.controls['userEmail'].touched)">
+            <i class="material-icons">check</i>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
